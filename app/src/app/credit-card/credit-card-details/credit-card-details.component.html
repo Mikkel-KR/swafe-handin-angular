@@ -1,0 +1,12 @@
+<div *ngIf="(creditCard$ | async) as creditCard; else noCard">
+    <h2>{{creditCard.card_number}}</h2>
+    <p>Name: {{creditCard.cardholder_name}}</p>
+    <p>CSC code: {{creditCard.csc_code}}</p>
+    <p>Expiration month: {{creditCard.expiration_date_month}}</p>
+    <p>Expiration year: {{creditCard.expiration_date_year}}</p>
+    <p>Issuer: {{creditCard.issuer}}</p>
+</div>
+
+<ng-template #noCard>
+    <h1>No credit card found.</h1>
+</ng-template>
