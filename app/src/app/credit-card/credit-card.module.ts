@@ -5,8 +5,7 @@ import { CreditCardListComponent } from './credit-card-list/credit-card-list.com
 import { CreditCardListItemComponent } from './credit-card-list-item/credit-card-list-item.component';
 import { CreditCardRoutingModule } from './credit-card-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     CreditCardRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule
   ]
 })
 export class CreditCardModule { }

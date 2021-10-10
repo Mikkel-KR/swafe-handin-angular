@@ -1,1 +1,38 @@
-<p>credit-card-add works!</p>
+<h1>Add new credit card</h1>
+<form [formGroup]="creditCardForm" (ngSubmit)="onSubmit()">
+    <div class="form-wrapper">
+        <label for="card_number">Card-Number</label>
+        <input type="text" formControlName="card_number">
+        <label for="cardholder_name">Cardholder Name</label>
+        <input type="text" formControlName="cardholder_name">
+        <hr/>
+        <label for="csc_code">CSC Code</label>
+        <input type="text" formControlName="csc_code">
+        <hr/>
+        <label for="expiration_date">Expiration Date</label>
+        <div class="form-wrapper" formGroupName="expiration_date">
+            <input type="number" formControlName="month" title="Month">
+            <input type="number" formControlName="year" title="Year">
+        </div>
+        <hr/>
+        <label for="issuer">Issuer</label>
+        <input type="text" formControlName="issuer">
+        <hr/>
+        <button type="submit" [disabled]="creditCardForm.invalid">Submit</button>
+    </div>
+</form>
+<pre>
+    <h3>Form value:</h3>
+    {{creditCardForm.value | json}}
+</pre>
+<pre>
+    <h3>errors:</h3>
+    Card-number: {{ creditCardForm.get('card_number')?.errors | json }}
+    Cardholder-name: {{ creditCardForm.get('cardholder_name')?.errors | json }}
+    CSC Code: {{ creditCardForm.get('csc_code')?.errors | json}}
+    Expiration Date month: {{ creditCardForm.get('expiration_date.month')?.errors | json }}
+    Expiration Date year: {{ creditCardForm.get('expiration_date.year')?.errors | json }}
+    Issuer: {{ creditCardForm.get('issuer')?.errors | json}}
+    <h3>status: {{ creditCardForm.status }}</h3>
+    
+</pre>
