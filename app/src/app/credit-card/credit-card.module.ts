@@ -6,12 +6,16 @@ import { CreditCardListItemComponent } from './credit-card-list-item/credit-card
 import { CreditCardRoutingModule } from './credit-card-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CreditCardDetailsComponent } from './credit-card-details/credit-card-details.component';
+
+
 
 @NgModule({
   declarations: [
     CreditCardAddComponent,
     CreditCardListComponent,
     CreditCardListItemComponent,
+    CreditCardDetailsComponent,
   ],
   imports: [
     CommonModule,

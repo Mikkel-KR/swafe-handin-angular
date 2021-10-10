@@ -1,9 +1,5 @@
-<nav style="background-color: aqua; padding: 10px; display: flex;">
-  <div style="display: flex; justify-content: space-evenly; width: 100%;">
-    <a routerLink="">Home</a>
-    <a routerLink="credit-cards">Credit Cards</a>
-    <a routerLink="transactions">Transactions</a>
-  </div>
-</nav>
+<app-navigation-bar></app-navigation-bar>
 
-<router-outlet></router-outlet>
+<div class="mainContainer">
+  <router-outlet></router-outlet>
+</div>
