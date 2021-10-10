@@ -1,7 +1,5 @@
-<p>credit-card-list works!</p>
-
 <div style="display: flex; flex-wrap: wrap;">
-    <div *ngFor="let creditCardInfo of creditCards$ | async" style="margin:10px">
+    <div *ngFor="let creditCardInfo of creditCards$ | async" style="margin:25px">
         <app-credit-card-list-item [creditCardInfo]="creditCardInfo"></app-credit-card-list-item>
     </div>
 </div>
