@@ -1,0 +1,7 @@
+<p>credit-card-list works!</p>
+
+<div style="display: flex;">
+    <div *ngFor="let creditCardInfo of creditCards$ | async">
+        <app-credit-card-list-item [creditCardInfo]="creditCardInfo"></app-credit-card-list-item>
+    </div>
+</div>
