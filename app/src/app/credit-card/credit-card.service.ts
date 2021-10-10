@@ -11,7 +11,7 @@ export class CreditCardService {
   constructor(private http: HttpClient) { }
 
   getCreditCards(): Observable<ReadonlyArray<ICreditCard>>{
-    return this.http.get<ReadonlyArray<ICreditCard>>("localhost:3000/credit_cards");
+    return this.http.get<ReadonlyArray<ICreditCard>>("http://localhost:3000/credit_cards");
   }
 
   // addCreditCards(): Observable<ReadonlyArray<ICreditCard>>{
