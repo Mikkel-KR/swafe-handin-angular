@@ -1,7 +1,9 @@
-<div style="width: 200px;">
-    <a [routerLink]="creditCardInfo.card_number.toString()" style="text-decoration: none; color: #000;">
-        <h4>{{creditCardInfo.card_number}}</h4>
-        <p>Holder: {{creditCardInfo.cardholder_name}}</p>
-        <p>Issuer: {{creditCardInfo.issuer}}</p>
+<mat-card style="width: 250px;">
+    <a [routerLink]="'credit-cards/' + creditCardInfo.card_number.toString()"
+        style="text-decoration: none; color: #000;">
+        <mat-card-title>{{creditCardInfo.cardholder_name}}</mat-card-title>
+        <mat-card-content>
+            <p>{{creditCardInfo.card_number}} {{creditCardInfo.issuer}}</p>
+        </mat-card-content>
     </a>
-</div>
+</mat-card>

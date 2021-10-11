@@ -1,12 +1,37 @@
 <div *ngIf="(creditCard$ | async) as creditCard; else noCard">
-    <h2>{{creditCard.card_number}}</h2>
-    <p>Name: {{creditCard.cardholder_name}}</p>
-    <p>CSC code: {{creditCard.csc_code}}</p>
-    <p>Expiration month: {{creditCard.expiration_date_month}}</p>
-    <p>Expiration year: {{creditCard.expiration_date_year}}</p>
-    <p>Issuer: {{creditCard.issuer}}</p>
+    <div style="display: flex; margin-bottom: 50px">
+        <div>
+            <h2>{{creditCard.card_number}}</h2>
+            <p>Name: {{creditCard.cardholder_name}}</p>
+            <p>CSC code: {{creditCard.csc_code}}</p>
+            <p>Expiration month: {{creditCard.expiration_date_month}}</p>
+            <p>Expiration year: {{creditCard.expiration_date_year}}</p>
+            <p>Issuer: {{creditCard.issuer}}</p>
+        </div>
+        <div style="align-self: center;">
+            <button>Delete credit card</button>
+        </div>
+    </div>
+
+    <h2>Transactions</h2>
+    <div style="display: flex; flex-wrap: wrap; margin: -10px 0 0 -10px">
+        <mat-card *ngFor='let transaction of transactions$ | async' style="margin:10px; width: 400px">
+            <mat-card-title>{{transaction.currency}} {{transaction.amount}}</mat-card-title>
+            <mat-card-subtitle>{{transaction.date | date}}</mat-card-subtitle>
+            <mat-card-content>
+                <p>{{transaction.comment}}</p>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>
 
 <ng-template #noCard>
     <h1>No credit card found.</h1>
 </ng-template>
+
+<!-- credit_card  -->
+<!-- uid -->
+<!-- amount -->
+<!-- comment -->
+<!-- date -->
+<!-- currency -->

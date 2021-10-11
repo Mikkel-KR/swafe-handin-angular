@@ -1,4 +1,4 @@
-import { ICreditCard } from "../creditCard";
+import { ICreditCard } from "./creditCard";
 
 export interface ITransaction {
     credit_card: ICreditCard;

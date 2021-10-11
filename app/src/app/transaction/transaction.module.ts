@@ -4,6 +4,7 @@ import { TransactionOverviewComponent } from './transaction-overview/transaction
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransactionListItemComponent } from './transaction-list-item/transaction-list-item.component';
 import { TransactionAddComponent } from './transaction-add/transaction-add.component';
+import { TransactionRoutingModule } from './transaction-routing.module';
 
 
 
@@ -15,7 +16,8 @@ import { TransactionAddComponent } from './transaction-add/transaction-add.compo
     TransactionAddComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    TransactionRoutingModule,
   ]
 })
 export class TransactionModule { }

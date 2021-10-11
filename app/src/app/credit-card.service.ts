@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ICreditCard } from '../creditCard';
+import { ICreditCard } from './creditCard';
 
 @Injectable({
-  providedIn: 'any'
+  providedIn: 'root'
 })
 export class CreditCardService {
 

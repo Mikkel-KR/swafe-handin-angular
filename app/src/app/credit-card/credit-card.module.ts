@@ -7,6 +7,7 @@ import { CreditCardRoutingModule } from './credit-card-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreditCardDetailsComponent } from './credit-card-details/credit-card-details.component';
+import { MatCardModule } from "@angular/material/card";
 
 
 
@@ -21,7 +22,11 @@ import { CreditCardDetailsComponent } from './credit-card-details/credit-card-de
     CommonModule,
     CreditCardRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    MatCardModule,
+  ],
+  exports: [
+    CreditCardListComponent
+  ],
 })
 export class CreditCardModule { }
