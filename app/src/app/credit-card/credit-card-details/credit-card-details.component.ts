@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 import { ICreditCard } from 'src/app/creditCard';
@@ -14,21 +14,26 @@ import { CreditCardService } from '../../credit-card.service';
 })
 export class CreditCardDetailsComponent implements OnInit {
 
+  creditCardNumber!: number;
   creditCard$!: Observable<ICreditCard | undefined>;
   transactions$!: Observable<ReadonlyArray<ITransaction>>;
 
-  constructor(private creditCardService: CreditCardService, private transactionService: TransactionService, private activatedRoute: ActivatedRoute) {
+  constructor(
+    private creditCardService: CreditCardService,
+    private transactionService: TransactionService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router) {
 
     this.activatedRoute.params.subscribe(params => {
-      const cardNumber = parseInt(params.creditCardNumber);
+      this.creditCardNumber = parseInt(params.creditCardNumber);
 
       this.creditCard$ = this.creditCardService.getCreditCards().pipe(
-        map(cc => cc.find(c => c.card_number === cardNumber))
+        map(cc => cc.find(c => c.card_number === this.creditCardNumber))
       );
 
       this.transactions$ = this.transactionService.getTransactions().pipe(
         map(transaction =>
-          transaction.filter(t => t.credit_card.card_number === cardNumber)
+          transaction.filter(t => t.credit_card.card_number === this.creditCardNumber)
             .sort((a, b) => a.date - b.date)
         )
       );
@@ -37,6 +42,14 @@ export class CreditCardDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  deleteCreditCard() {
+    const response = this.creditCardService.deleteCreditCard(this.creditCardNumber);
+    response.subscribe(r => {
+      console.log(r);
+      this.router.navigate([""]);
+    });
   }
 
 }

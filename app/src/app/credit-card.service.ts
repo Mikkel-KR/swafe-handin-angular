@@ -14,6 +14,10 @@ export class CreditCardService {
     return this.http.get<ReadonlyArray<ICreditCard>>("http://localhost:3000/credit_cards");
   }
 
+  deleteCreditCard(number: number) {
+    return this.http.delete(`http://localhost:3000/credit_cards/${number}`);
+  }
+
   addCreditCard(creditCard: ICreditCard): Observable<any> {
     const customHeaders = new HttpHeaders({
       'Accept': 'application/json'
