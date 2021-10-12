@@ -1,23 +1,42 @@
 <h1>Add new credit card</h1>
 <form [formGroup]="creditCardForm" (ngSubmit)="onSubmit()">
     <div class="form-wrapper">
-        <label for="card_number">Card-Number</label>
-        <input type="text" formControlName="card_number">
-        <label for="cardholder_name">Cardholder Name</label>
-        <input type="text" formControlName="cardholder_name">
-        <hr/>
-        <label for="csc_code">CSC Code</label>
-        <input type="text" formControlName="csc_code">
-        <hr/>
-        <label for="expiration_date">Expiration Date</label>
-        <div class="form-wrapper" formGroupName="expiration_date">
-            <input type="number" formControlName="month" title="Month">
-            <input type="number" formControlName="year" title="Year">
+        <mat-form-field appearance="fill">
+            <mat-label for="card_number">Card-Number</mat-label>
+            <input matInput type="text" placeholder="1234567" formControlName="card_number">
+            <mat-error *ngIf="hasErrors('card_number', ['minlength', 'maxlength']) && !hasRequiredError('card_number')">
+                Card-number must be between 7 and 13 digits.
+            </mat-error>
+            <mat-error *ngIf="hasErrors('card_number', ['mustBeInteger']) && !hasRequiredError('card_number')">
+                Card-number must be an integer.
+            </mat-error>
+            <mat-error *ngIf="hasRequiredError('card_number')">
+                Card-number is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label for="cardholder_name">Cardholder Name</mat-label>
+            <input matInput type="text" placeholder="John Doe" formControlName="cardholder_name">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label for="csc_code">CSC Code</mat-label>
+            <input matInput type="text" placeholder="321" formControlName="csc_code">
+        </mat-form-field>
+        <h3>Expiration Date</h3>
+        <div class="expiration-date-container" formGroupName="expiration_date">
+            <mat-form-field appearance="fill">
+                <mat-label for="month">Month</mat-label>
+                <input matInput type="number" placeholder="1" formControlName="month">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label for="year">Year</mat-label>
+                <input matInput type="number" placeholder="2021" formControlName="year">
+            </mat-form-field>
         </div>
-        <hr/>
-        <label for="issuer">Issuer</label>
-        <input type="text" formControlName="issuer">
-        <hr/>
+        <mat-form-field appearance="fill">
+            <mat-label for="issuer">Issuer</mat-label>
+            <input matInput type="text" placeholder="Company A" formControlName="issuer">
+        </mat-form-field>
         <button type="submit" [disabled]="creditCardForm.invalid">Submit</button>
     </div>
 </form>
@@ -30,6 +49,7 @@
     Card-number: {{ creditCardForm.get('card_number')?.errors | json }}
     Cardholder-name: {{ creditCardForm.get('cardholder_name')?.errors | json }}
     CSC Code: {{ creditCardForm.get('csc_code')?.errors | json}}
+    Expiration Date: {{ creditCardForm.get('expiration_date')?.errors | json }}
     Expiration Date month: {{ creditCardForm.get('expiration_date.month')?.errors | json }}
     Expiration Date year: {{ creditCardForm.get('expiration_date.year')?.errors | json }}
     Issuer: {{ creditCardForm.get('issuer')?.errors | json}}

@@ -8,8 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreditCardDetailsComponent } from './credit-card-details/credit-card-details.component';
 import { MatCardModule } from "@angular/material/card";
-
-
+import { MatFormFieldModule } from "@angular/material/form-field"
+import { MatInputModule } from "@angular/material/input"
 
 @NgModule({
   declarations: [
@@ -24,9 +24,12 @@ import { MatCardModule } from "@angular/material/card";
     HttpClientModule,
     ReactiveFormsModule,
     MatCardModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
-    CreditCardListComponent
+    CreditCardListComponent,
+    CreditCardAddComponent
   ],
 })
 export class CreditCardModule { }

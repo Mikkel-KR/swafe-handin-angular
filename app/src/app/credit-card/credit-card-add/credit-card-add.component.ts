@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { CreditCardService } from '../../credit-card.service';
 import { CustomValidators } from './CustomValidators';
 import { ICreditCard } from '../../creditCard';
+import { ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 
 @Component({
   selector: 'app-credit-card-add',
@@ -16,15 +17,15 @@ export class CreditCardAddComponent implements OnInit {
     cardholder_name: ['', Validators.required],
     csc_code: ['', [Validators.required, CustomValidators.mustBeInteger(), CustomValidators.exactLength(3)]],
     expiration_date: this.formBuilder.group({
-      month: ['', CustomValidators.inRange(1, 12)],
-      year: ['', CustomValidators.inRange(1, 31)],
+      month: ['', Validators.required, CustomValidators.inRange(1, 12)],
+      year: ['', Validators.required, CustomValidators.inRange(1, 31)],
     }, {validators: Validators.required, updateOn: 'change'}),
     issuer: ['', Validators.required]
-  })
-  private creditCardService: CreditCardService
+  });
+
+  matcher = new ShowOnDirtyErrorStateMatcher();
 
   constructor(private formBuilder: FormBuilder, private service: CreditCardService) {
-    this.creditCardService = service;
    }
 
   ngOnInit(): void {
@@ -53,6 +54,18 @@ export class CreditCardAddComponent implements OnInit {
     response.subscribe(res => {
       console.log(res);
     });
+  }
+
+  // Validation error functions
+
+  hasRequiredError(formControlName: string) {
+    return this.hasErrors(formControlName, ['required'])
+  }
+
+  hasErrors(formControlName: string, errorNames: Array<string>) {
+    return errorNames.some(errorName => {
+      return this.creditCardForm.controls[formControlName].hasError(errorName);
+    }) 
   }
 
 }
