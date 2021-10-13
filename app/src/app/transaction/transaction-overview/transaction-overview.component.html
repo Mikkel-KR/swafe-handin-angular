@@ -1,1 +1,19 @@
-<p>transaction-overview works!</p>
+<h2>Transactions</h2>
+<div>
+    <p>Filter by card number</p>
+    <mat-form-field appearance="fill">
+        <mat-label>Favorite food</mat-label>
+        <mat-select>
+            <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{food.viewValue}}
+            </mat-option> -->
+        </mat-select>
+    </mat-form-field>
+</div>
+<div *ngIf="(transactions$ | async) as transactions; else noTransactions">
+    <app-transaction-list [transactions]="transactions"></app-transaction-list>
+</div>
+
+<ng-template #noTransactions>
+    <h1>No transactions found.</h1>
+</ng-template>

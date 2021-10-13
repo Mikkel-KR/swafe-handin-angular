@@ -32,8 +32,8 @@ export class CreditCardDetailsComponent implements OnInit {
       );
 
       this.transactions$ = this.transactionService.getTransactions().pipe(
-        map(transaction =>
-          transaction.filter(t => t.credit_card.card_number === this.creditCardNumber)
+        map(transactions =>
+          transactions.filter(transaction => transaction.credit_card.card_number === this.creditCardNumber)
             .sort((a, b) => a.date - b.date)
         )
       );
@@ -46,10 +46,7 @@ export class CreditCardDetailsComponent implements OnInit {
 
   deleteCreditCard() {
     const response = this.creditCardService.deleteCreditCard(this.creditCardNumber);
-    response.subscribe(r => {
-      console.log(r);
-      this.router.navigate([""]);
-    });
+    response.subscribe(r => this.router.navigate([""]));
   }
 
 }

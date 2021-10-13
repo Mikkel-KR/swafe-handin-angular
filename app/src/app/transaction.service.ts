@@ -10,8 +10,8 @@ export class TransactionService {
 
   constructor(private http: HttpClient) { }
   
-  getTransactions(): Observable<ReadonlyArray<ITransaction>>{
-    return this.http.get<ReadonlyArray<ITransaction>>("http://localhost:3000/transactions");
+  getTransactions(): Observable<Array<ITransaction>>{
+    return this.http.get<Array<ITransaction>>("http://localhost:3000/transactions");
   }
   
   // addTransaction(transaction: ITransaction): Observable<any> {
@@ -22,3 +22,12 @@ export class TransactionService {
   //   return this.http.post("http://localhost:3000/transactions", transaction, { headers: customHeaders });
   // }
 }
+
+
+
+
+// Card number max -> 13 -> 16
+// CSC -> only accept numbers (must be integer)
+// 	Validator problemer ved number field? -> mulig løsning lav field om til text field
+
+// Credit card card router forkert på /credit-cards

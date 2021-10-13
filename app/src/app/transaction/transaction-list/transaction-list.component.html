@@ -1,1 +1,3 @@
-<p>transaction-list works!</p>
+<div style="display: flex; flex-wrap: wrap; margin: 0 -10px 0 -10px">
+    <app-transaction-list-item *ngFor="let transaction of transactions" [transaction]="transaction" style="margin: 10px"></app-transaction-list-item>
+</div>

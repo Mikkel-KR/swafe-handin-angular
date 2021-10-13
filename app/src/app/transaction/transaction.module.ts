@@ -5,6 +5,9 @@ import { TransactionListComponent } from './transaction-list/transaction-list.co
 import { TransactionListItemComponent } from './transaction-list-item/transaction-list-item.component';
 import { TransactionAddComponent } from './transaction-add/transaction-add.component';
 import { TransactionRoutingModule } from './transaction-routing.module';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 
@@ -18,6 +21,9 @@ import { TransactionRoutingModule } from './transaction-routing.module';
   imports: [
     CommonModule,
     TransactionRoutingModule,
+    MatCardModule,
+    MatSelectModule,
+    MatFormFieldModule,
   ]
 })
 export class TransactionModule { }

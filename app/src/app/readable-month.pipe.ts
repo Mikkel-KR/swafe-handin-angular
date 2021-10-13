@@ -8,25 +8,25 @@ import { Pipe, PipeTransform } from '@angular/core';
  *   {{ 2 | exponentialStrength:10 }}
  *   formats to: 1024
 */
-@Pipe({name: 'readableMonth'})
+@Pipe({ name: 'readableMonth' })
 export class readableMonthPipe implements PipeTransform {
 
     private months: string[] = [
-        "January", 
-        "February", 
-        "March", 
-        "April", 
-        "May", 
-        "June", 
-        "July", 
-        "August", 
-        "Septemper", 
-        "October", 
-        "November", 
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "Septemper",
+        "October",
+        "November",
         "December"
     ]
 
     transform(value: number): string {
-    return this.months[value];
+        return this.months[value - 1];
     }
 }

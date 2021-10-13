@@ -1,1 +1,9 @@
-<p>transaction-list-item works!</p>
+<mat-card style="width: 400px">
+    <mat-card-title>{{transaction.currency}} {{transaction.amount}}</mat-card-title>
+    <mat-card-subtitle>{{transaction.date | date}}</mat-card-subtitle>
+    <mat-card-subtitle>Card Holder: {{transaction.credit_card.cardholder_name}}</mat-card-subtitle>
+    <mat-card-subtitle>Card Number: {{transaction.credit_card.card_number}}</mat-card-subtitle>
+    <mat-card-content>
+        <p>{{transaction.comment}}</p>
+    </mat-card-content>
+</mat-card>
