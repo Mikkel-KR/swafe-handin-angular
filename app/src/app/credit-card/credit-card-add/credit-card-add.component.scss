@@ -1,16 +1,35 @@
 .form-wrapper {
+    margin: 2rem;
     display: flex;
     flex-direction: column;
-    align-items:flex-start;
+    align-items:center;
     align-content:flex-start;
 
     .expiration-date-container {
         display: flex;
         flex-direction: column;
     }
+
+    button {
+        margin-top: 10px;
+    }
 }
 
 .form-wrapper mat-form-field {
     min-width: 250px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
+.form-validation-wrapper {
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content:center;
+    align-items:center;
+
+    h3 {
+        font-weight: bold;
+    }
+}

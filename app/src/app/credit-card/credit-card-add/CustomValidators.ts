@@ -9,6 +9,9 @@ export function mustBeInteger(): ValidatorFn {
 
 export function exactLength(len: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
+        if(control.value === null) {
+            return null;
+        }
         const forbidden = control.value.length !== len
         return forbidden ? {exactLength: {requiredLength: len, actualLength: control.value.length}} : null;
     };

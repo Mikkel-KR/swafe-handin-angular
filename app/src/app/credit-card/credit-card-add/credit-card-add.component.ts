@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { CreditCardService } from '../../credit-card.service';
 import { CustomValidators } from './CustomValidators';
 import { ICreditCard } from '../../creditCard';
-import { ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 
 @Component({
   selector: 'app-credit-card-add',
@@ -17,13 +16,14 @@ export class CreditCardAddComponent implements OnInit {
     cardholder_name: ['', Validators.required],
     csc_code: ['', [Validators.required, CustomValidators.mustBeInteger(), CustomValidators.exactLength(3)]],
     expiration_date: this.formBuilder.group({
-      month: ['', Validators.required, CustomValidators.inRange(1, 12)],
-      year: ['', Validators.required, CustomValidators.inRange(1, 31)],
+      month: ['', [Validators.required, CustomValidators.inRange(1, 12)]],
+      year: ['', [Validators.required, CustomValidators.inRange(1, 31)]],
     }, {validators: Validators.required, updateOn: 'change'}),
     issuer: ['', Validators.required]
   });
 
-  matcher = new ShowOnDirtyErrorStateMatcher();
+  showValidationInfo: boolean = false;
+  cardCreated: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private service: CreditCardService) {
    }
@@ -45,7 +45,7 @@ export class CreditCardAddComponent implements OnInit {
       csc_code: parseInt(formData.csc_code),
       cardholder_name: formData.cardholder_name,
       expiration_date_month: formData.expiration_date.month,
-      expiration_date_year: formData.expiration_date.year,
+      expiration_date_year: this.transformYear(formData.expiration_date.year),
       issuer: formData.issuer
     }
 
@@ -53,7 +53,45 @@ export class CreditCardAddComponent implements OnInit {
 
     response.subscribe(res => {
       console.log(res);
+
+      if(res.message="Created credit card") {
+        this.cardCreated = true;
+        this.resetForm(this.creditCardForm);
+      }
     });
+  }
+
+  transformYear(yearValue: number) {
+    const yearStr = yearValue.toString();
+
+    if(yearStr.length === 4) {
+      return yearValue;
+    }
+
+    if(yearStr.length === 1) {
+      return parseInt("200" + yearValue);
+    } else if(yearStr.length === 2) {
+      return parseInt("20" + yearValue);
+    } else if(yearStr.length === 3){
+      return parseInt("2" + yearValue);
+    } else {
+      return yearValue;
+    }
+  }
+
+  toggleValidationInfo() {
+    this.showValidationInfo = !this.showValidationInfo;
+  }
+
+  resetForm(form: FormGroup) {
+
+    form.reset();
+    for (let control in form.controls) {
+      form.controls[control].setErrors(null);
+    }
+
+    form.get('expiration_date.month')?.setErrors(null);
+    form.get('expiration_date.year')?.setErrors(null);
   }
 
   // Validation error functions
@@ -63,9 +101,9 @@ export class CreditCardAddComponent implements OnInit {
   }
 
   hasErrors(formControlName: string, errorNames: Array<string>) {
-    return errorNames.some(errorName => {
-      return this.creditCardForm.controls[formControlName].hasError(errorName);
-    }) 
+      return errorNames.some(errorName => {
+        return this.creditCardForm.hasError(errorName, formControlName);
+      })
   }
 
 }

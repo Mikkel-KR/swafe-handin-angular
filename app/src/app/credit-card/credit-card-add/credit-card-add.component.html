@@ -1,6 +1,7 @@
-<h1>Add new credit card</h1>
+
 <form [formGroup]="creditCardForm" (ngSubmit)="onSubmit()">
     <div class="form-wrapper">
+        <h1>Add new credit card</h1>
         <mat-form-field appearance="fill">
             <mat-label for="card_number">Card-Number</mat-label>
             <input matInput type="text" placeholder="1234567" formControlName="card_number">
@@ -17,42 +18,73 @@
         <mat-form-field appearance="fill">
             <mat-label for="cardholder_name">Cardholder Name</mat-label>
             <input matInput type="text" placeholder="John Doe" formControlName="cardholder_name">
+            <mat-error *ngIf="hasRequiredError('cardholder_name')">
+                Cardholder Name is <strong>required</strong>
+            </mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label for="csc_code">CSC Code</mat-label>
             <input matInput type="text" placeholder="321" formControlName="csc_code">
+            <mat-error *ngIf="hasErrors('csc_code', ['exactLength']) && !hasRequiredError('csc_code')">
+                CSC Code must be exactly 3 digits
+            </mat-error>
+            <mat-error *ngIf="hasRequiredError('csc_code')">
+                CSC Code is <strong>required</strong>
+            </mat-error>
         </mat-form-field>
-        <h3>Expiration Date</h3>
         <div class="expiration-date-container" formGroupName="expiration_date">
+            <h3>Expiration Date</h3>
             <mat-form-field appearance="fill">
                 <mat-label for="month">Month</mat-label>
                 <input matInput type="number" placeholder="1" formControlName="month">
+                <mat-error *ngIf="hasErrors('expiration_date.month', ['inRange']) && !hasRequiredError('expiration_date.month')">
+                    Year must be between <strong>January (e.g. "1")</strong> and <strong>December (e.g. "12")</strong>
+                </mat-error>
+                <mat-error *ngIf="hasRequiredError('expiration_date.month')">
+                    Month is <strong>required</strong>
+                </mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label for="year">Year</mat-label>
-                <input matInput type="number" placeholder="2021" formControlName="year">
+                <input matInput type="number" placeholder="21" formControlName="year">
+                <mat-hint>E.g. 2021 should be "21"</mat-hint>
+                <mat-error *ngIf="hasErrors('expiration_date.year', ['inRange']) && !hasRequiredError('expiration_date.year')">
+                    Year must be between <strong>2001 (e.g. "1")</strong> and <strong>2031 (e.g. "31")</strong>
+                </mat-error>
+                <mat-error *ngIf="hasRequiredError('expiration_date.year')">
+                    Year is <strong>required</strong>
+                </mat-error>
             </mat-form-field>
+            <hr/>
         </div>
         <mat-form-field appearance="fill">
             <mat-label for="issuer">Issuer</mat-label>
-            <input matInput type="text" placeholder="Company A" formControlName="issuer">
+            <input matInput type="text" placeholder="JCB" formControlName="issuer">
+            <mat-error *ngIf="hasRequiredError('issuer')">
+                Issuer is <strong>required</strong>
+            </mat-error>
         </mat-form-field>
-        <button type="submit" [disabled]="creditCardForm.invalid">Submit</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="creditCardForm.invalid">Submit</button>
+        <p style="margin-top: 5px; color: green" *ngIf="cardCreated">Card was created successfully</p>
+        <button mat-raised-button color="button" type="button" type="button" (click)="toggleValidationInfo()">Toogle validation-info</button>
     </div>
 </form>
-<pre>
-    <h3>Form value:</h3>
-    {{creditCardForm.value | json}}
+
+<pre class="form-validation-wrapper" *ngIf="this.showValidationInfo">
+    <div class="form-validation-entry">
+        <h3>Form value:</h3>
+        {{creditCardForm.value | json}}
+        <h3>Status: {{ creditCardForm.status }}</h3>
+        <h3>Errors:</h3>
+        Card Number: {{ creditCardForm.get('card_number')?.errors | json }}
+        Cardholder Name: {{ creditCardForm.get('cardholder_name')?.errors | json }}
+        CSC Code: {{ creditCardForm.get('csc_code')?.errors | json}}
+        Expiration Date: {{ creditCardForm.get('expiration_date')?.errors | json }}
+        Expiration Date month: {{ creditCardForm.get('expiration_date.month')?.errors | json }}
+        Expiration Date year: {{ creditCardForm.get('expiration_date.year')?.errors | json }}
+        Issuer: {{ creditCardForm.get('issuer')?.errors | json}}
+    </div>
 </pre>
-<pre>
-    <h3>errors:</h3>
-    Card-number: {{ creditCardForm.get('card_number')?.errors | json }}
-    Cardholder-name: {{ creditCardForm.get('cardholder_name')?.errors | json }}
-    CSC Code: {{ creditCardForm.get('csc_code')?.errors | json}}
-    Expiration Date: {{ creditCardForm.get('expiration_date')?.errors | json }}
-    Expiration Date month: {{ creditCardForm.get('expiration_date.month')?.errors | json }}
-    Expiration Date year: {{ creditCardForm.get('expiration_date.year')?.errors | json }}
-    Issuer: {{ creditCardForm.get('issuer')?.errors | json}}
-    <h3>status: {{ creditCardForm.status }}</h3>
-    
-</pre>
+
+
+

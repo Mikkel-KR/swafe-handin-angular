@@ -4,7 +4,7 @@
             <h2>{{creditCard.card_number}}</h2>
             <p>Name: {{creditCard.cardholder_name}}</p>
             <p>CSC code: {{creditCard.csc_code}}</p>
-            <p>Expiration month: {{creditCard.expiration_date_month}}</p>
+            <p>Expiration month: {{creditCard.expiration_date_month | readableMonth}}</p>
             <p>Expiration year: {{creditCard.expiration_date_year}}</p>
             <p>Issuer: {{creditCard.issuer}}</p>
         </div>
