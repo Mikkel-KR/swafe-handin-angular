@@ -15,7 +15,7 @@
         <mat-form-field appearance="fill">
             <mat-label for="amount">Amount</mat-label>
             <input matInput type="text" placeholder="300" formControlName="amount">
-            <mat-error *ngIf="hasErrors('amount', ['mustBeInteger'])">
+            <mat-error *ngIf="hasErrors('amount', ['mustBeNumber'])">
                 Amount must be an number
             </mat-error>
             <mat-error *ngIf="hasRequiredError('amount')">
@@ -31,6 +31,14 @@
             </mat-select>
             <mat-error *ngIf="hasRequiredError('currency')">
                 Currency is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label for="date">Date</mat-label>
+            <input matInput type="date" formControlName="date"/>
+            <mat-hint>The date for which the transaction should take place</mat-hint>
+            <mat-error *ngIf="hasRequiredError('date')">
+                Date is <strong>required</strong>
             </mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">

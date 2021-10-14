@@ -19,8 +19,9 @@ export class TransactionAddComponent implements OnInit {
 
   createTransactionForm = this.formBuilder.group({
     credit_card_number: ['', Validators.required],
-    amount: ['', [ Validators.required, CustomValidators.mustBeInteger()]],
+    amount: ['', [ Validators.required, CustomValidators.mustBeNumber()]],
     currency: ['', Validators.required],
+    date: ['', Validators.required],
     comment: ['']
   });
 
@@ -68,7 +69,7 @@ export class TransactionAddComponent implements OnInit {
         amount: formData.amount,
         comment: formData.comment,
         currency: formData.currency,
-        date: Date.now()
+        date: Date.parse(formData.date)
       }
   
       this.handleSendCreateRequest(newTransaction);

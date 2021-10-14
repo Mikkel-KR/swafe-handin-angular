@@ -7,6 +7,13 @@ export function mustBeInteger(): ValidatorFn {
     };
 }
 
+export function mustBeNumber(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+        const forbidden = !RegExp("^[0-9]*[\.]?[0-9]*$").test(control.value);
+        return forbidden ? { mustBeNumber: { value: control.value } } : null;
+    };
+}
+
 export function exactLength(len: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
         if (control.value === null) {
