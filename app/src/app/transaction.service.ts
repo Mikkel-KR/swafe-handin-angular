@@ -23,11 +23,4 @@ export class TransactionService {
   }
 }
 
-
-
-
-// Card number max -> 13 -> 16
-// CSC -> only accept numbers (must be integer)
-// 	Validator problemer ved number field? -> mulig løsning lav field om til text field
-
 // Credit card card router forkert på /credit-cards

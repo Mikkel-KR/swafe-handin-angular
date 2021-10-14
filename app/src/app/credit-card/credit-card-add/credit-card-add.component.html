@@ -6,7 +6,7 @@
             <mat-label for="card_number">Card-Number</mat-label>
             <input matInput type="text" placeholder="1234567" formControlName="card_number">
             <mat-error *ngIf="hasErrors('card_number', ['minlength', 'maxlength']) && !hasRequiredError('card_number')">
-                Card-number must be between 7 and 13 digits.
+                Card-number must be between 7 and 16 digits.
             </mat-error>
             <mat-error *ngIf="hasErrors('card_number', ['mustBeInteger']) && !hasRequiredError('card_number')">
                 Card-number must be an integer.
