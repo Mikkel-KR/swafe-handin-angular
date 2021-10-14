@@ -9,10 +9,12 @@ import { ITransaction } from 'src/app/transaction';
 export class TransactionListComponent implements OnInit {
 
   @Input() transactions!: ITransaction[];
+  @Input() extendedInformation!: boolean;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.transactions = this.transactions.sort((a, b) => b.date - a.date);
   }
 
 }

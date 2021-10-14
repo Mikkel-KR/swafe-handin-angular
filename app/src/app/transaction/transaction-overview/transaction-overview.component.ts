@@ -17,20 +17,23 @@ export class TransactionOverviewComponent implements OnInit {
   creditCards$!: Observable<ReadonlyArray<ICreditCard>>;
   transactions$!: Observable<Array<ITransaction>>;
   filteredTransactions$!: Observable<Array<ITransaction>>;
+  filterCardNumber?: number;
 
   constructor(private transactionService: TransactionService, private creditCardService: CreditCardService) {
     this.transactions$ = this.transactionService.getTransactions();
     this.creditCards$ = this.creditCardService.getCreditCards().pipe();
     this.filteredTransactions$ = this.transactions$;
+    this.filterCardNumber = undefined;
   }
 
   ngOnInit(): void {
   }
 
   filterSelectionChanged(selection: MatSelectChange): void {
-    if (selection.value) {
+    this.filterCardNumber = selection.value;
+    if (this.filterCardNumber) {
       this.filteredTransactions$ = this.transactions$.pipe(
-        map(transactions => transactions.filter(transaction => transaction.credit_card.card_number === selection.value.card_number))
+        map(transactions => transactions.filter(transaction => transaction.credit_card.card_number === this.filterCardNumber))
       );
     } else {
       this.filteredTransactions$ = this.transactions$;

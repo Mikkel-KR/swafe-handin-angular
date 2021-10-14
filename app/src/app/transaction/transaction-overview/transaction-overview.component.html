@@ -10,14 +10,14 @@
             <mat-option>
                 All
             </mat-option>
-            <mat-option *ngFor="let creditCard of creditCards$ | async" [value]="creditCard">
-                {{creditCard.card_number}}
+            <mat-option *ngFor="let creditCard of creditCards$ | async" [value]="creditCard.card_number">
+                {{creditCard.card_number}} ({{creditCard.cardholder_name}})
             </mat-option>
         </mat-select>
     </mat-form-field>
 </div>
 <div *ngIf="(filteredTransactions$ | async) as transactions; else noTransactions">
-    <app-transaction-list [transactions]="transactions"></app-transaction-list>
+    <app-transaction-list [transactions]="transactions" [extendedInformation]="true"></app-transaction-list>
 </div>
 
 <ng-template #noTransactions>

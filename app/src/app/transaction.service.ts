@@ -21,13 +21,12 @@ export class TransactionService {
     
     return this.http.post("http://localhost:3000/transactions", transaction, { headers: customHeaders });
   }
+
+  deleteTransaction(transactionUid: string) {
+    return this.http.delete(`http://localhost:3000/transactions/${transactionUid}`);
+  }
 }
 
 
-
-
-// Card number max -> 13 -> 16
-// CSC -> only accept numbers (must be integer)
-// 	Validator problemer ved number field? -> mulig løsning lav field om til text field
 
 // Credit card card router forkert på /credit-cards
