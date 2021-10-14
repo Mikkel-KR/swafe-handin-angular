@@ -1,5 +1,5 @@
 <div *ngIf="(creditCard$ | async) as creditCard; else noCard">
-    <div style="display: flex; margin-bottom: 50px">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 50px">
         <div>
             <h2>{{creditCard.card_number}}</h2>
             <p>Name: {{creditCard.cardholder_name}}</p>
@@ -8,8 +8,8 @@
             <p>Expiration year: {{creditCard.expiration_date_year}}</p>
             <p>Issuer: {{creditCard.issuer}}</p>
         </div>
-        <div style="align-self: center;">
-            <button (click)="deleteCreditCard()">Delete credit card</button>
+        <div>
+            <button mat-button color="warn" (click)="deleteCreditCard()">Delete credit card</button>
         </div>
     </div>
 
