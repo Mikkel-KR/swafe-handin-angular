@@ -8,6 +8,7 @@ import { CreditCardService } from 'src/app/credit-card.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ICreditCard } from 'src/app/creditCard';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transaction-add',
@@ -35,7 +36,8 @@ export class TransactionAddComponent implements OnInit {
   creditCards$: Observable<ReadonlyArray<ICreditCard>>;
   transactionCreated: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private transactionService: TransactionService, private creditCardService: CreditCardService) { 
+  constructor(private formBuilder: FormBuilder, private router: Router,
+    private transactionService: TransactionService, private creditCardService: CreditCardService) { 
     this.creditCards$ = this.creditCardService.getCreditCards();
   }
 
@@ -84,6 +86,7 @@ export class TransactionAddComponent implements OnInit {
       if(postResponse.message) {
         this.transactionCreated = true;
         this.resetForm(this.createTransactionForm);
+        this.router.navigateByUrl("/transactions")
       }
     });
   }

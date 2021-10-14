@@ -21,12 +21,6 @@ export class TransactionService {
     
     return this.http.post("http://localhost:3000/transactions", transaction, { headers: customHeaders });
   }
-
-  deleteTransaction(transactionUid: string) {
-    return this.http.delete(`http://localhost:3000/transactions/${transactionUid}`);
-  }
 }
-
-
 
 // Credit card card router forkert på /credit-cards
