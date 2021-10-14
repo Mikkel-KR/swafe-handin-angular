@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ICreditCard } from 'src/app/creditCard';
 
 @Component({
@@ -7,10 +8,13 @@ import { ICreditCard } from 'src/app/creditCard';
   styleUrls: ['./credit-card-list-item.component.scss']
 })
 export class CreditCardListItemComponent implements OnInit {
-  
-  @Input() creditCardInfo!: ICreditCard;
 
-  constructor() { }
+  @Input() creditCardInfo!: ICreditCard;
+  isInsideHomeComponent: boolean;
+
+  constructor() {
+    this.isInsideHomeComponent = window.location.pathname === "/";
+  }
 
   ngOnInit(): void {
   }
