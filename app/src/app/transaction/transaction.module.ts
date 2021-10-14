@@ -8,7 +8,9 @@ import { TransactionRoutingModule } from './transaction-routing.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from "@angular/material/input"
+import { MatButtonModule } from "@angular/material/button"
 
 
 
@@ -25,7 +27,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatButtonModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule
   ]
 })
 export class TransactionModule { }

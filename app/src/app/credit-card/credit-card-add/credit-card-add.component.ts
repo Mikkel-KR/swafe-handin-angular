@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreditCardService } from '../../credit-card.service';
-import { CustomValidators } from './CustomValidators';
+import { CustomValidators } from 'src/app/CustomValidators';
 import { ICreditCard } from '../../creditCard';
 
 @Component({

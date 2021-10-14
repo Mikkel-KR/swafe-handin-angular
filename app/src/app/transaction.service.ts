@@ -14,13 +14,13 @@ export class TransactionService {
     return this.http.get<Array<ITransaction>>("http://localhost:3000/transactions");
   }
   
-  // addTransaction(transaction: ITransaction): Observable<any> {
-  //   const customHeaders = new HttpHeaders({
-  //     'Accept': 'application/json'
-  //   });
+  addTransaction(transaction: ITransaction): Observable<any> {
+    const customHeaders = new HttpHeaders({
+      'Accept': 'application/json'
+    });
     
-  //   return this.http.post("http://localhost:3000/transactions", transaction, { headers: customHeaders });
-  // }
+    return this.http.post("http://localhost:3000/transactions", transaction, { headers: customHeaders });
+  }
 }
 
 

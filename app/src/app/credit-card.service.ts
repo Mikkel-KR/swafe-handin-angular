@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IPostResponse } from 'src/postResponse';
 import { ICreditCard } from './creditCard';
 
 @Injectable({
