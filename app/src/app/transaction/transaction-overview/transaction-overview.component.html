@@ -1,16 +1,22 @@
-<h2>Transactions</h2>
+<div style="display: flex; justify-content: space-between;">
+    <h2>Transactions</h2>
+    <button mat-button color="primary" routerLink="add-transaction">Add Transaction</button>
+</div>
 <div>
     <p>Filter by card number</p>
     <mat-form-field appearance="fill">
-        <mat-label>Favorite food</mat-label>
-        <mat-select>
-            <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
-                {{food.viewValue}}
-            </mat-option> -->
+        <mat-label>Credit Card</mat-label>
+        <mat-select (selectionChange)="filterSelectionChanged($event)">
+            <mat-option>
+                All
+            </mat-option>
+            <mat-option *ngFor="let creditCard of creditCards$ | async" [value]="creditCard">
+                {{creditCard.card_number}}
+            </mat-option>
         </mat-select>
     </mat-form-field>
 </div>
-<div *ngIf="(transactions$ | async) as transactions; else noTransactions">
+<div *ngIf="(filteredTransactions$ | async) as transactions; else noTransactions">
     <app-transaction-list [transactions]="transactions"></app-transaction-list>
 </div>
 
