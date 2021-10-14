@@ -28,6 +28,9 @@
             <mat-error *ngIf="hasErrors('csc_code', ['exactLength']) && !hasRequiredError('csc_code')">
                 CSC Code must be exactly 3 digits
             </mat-error>
+            <mat-error *ngIf="hasErrors('csc_code', ['mustBeInteger']) && !hasRequiredError('csc_code')">
+                CSC Code must be an integer
+            </mat-error>
             <mat-error *ngIf="hasRequiredError('csc_code')">
                 CSC Code is <strong>required</strong>
             </mat-error>
