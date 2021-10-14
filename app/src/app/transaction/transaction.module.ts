@@ -9,8 +9,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from "@angular/material/input"
-import { MatButtonModule } from "@angular/material/button"
+import { MatInputModule } from "@angular/material/input";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -29,7 +30,11 @@ import { MatButtonModule } from "@angular/material/button"
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule,
+  ],
+  exports: [
+    TransactionListComponent,
   ]
 })
 export class TransactionModule { }

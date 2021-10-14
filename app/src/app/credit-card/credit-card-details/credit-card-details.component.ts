@@ -16,7 +16,7 @@ export class CreditCardDetailsComponent implements OnInit {
 
   creditCardNumber!: number;
   creditCard$!: Observable<ICreditCard | undefined>;
-  transactions$!: Observable<ReadonlyArray<ITransaction>>;
+  transactions$!: Observable<Array<ITransaction>>;
 
   constructor(
     private creditCardService: CreditCardService,
@@ -34,7 +34,6 @@ export class CreditCardDetailsComponent implements OnInit {
       this.transactions$ = this.transactionService.getTransactions().pipe(
         map(transactions =>
           transactions.filter(transaction => transaction.credit_card.card_number === this.creditCardNumber)
-            .sort((a, b) => a.date - b.date)
         )
       );
 

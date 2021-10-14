@@ -1,5 +1,5 @@
 <div *ngIf="(creditCard$ | async) as creditCard; else noCard">
-    <div style="display: flex; margin-bottom: 50px">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 50px">
         <div>
             <h2>{{creditCard.card_number}}</h2>
             <p>Name: {{creditCard.cardholder_name}}</p>
@@ -8,20 +8,14 @@
             <p>Expiration year: {{creditCard.expiration_date_year}}</p>
             <p>Issuer: {{creditCard.issuer}}</p>
         </div>
-        <div style="align-self: center;">
-            <button (click)="deleteCreditCard()">Delete credit card</button>
+        <div>
+            <button mat-button color="warn" (click)="deleteCreditCard()">Delete credit card</button>
         </div>
     </div>
 
     <h2>Transactions</h2>
-    <div style="display: flex; flex-wrap: wrap; margin: -10px 0 0 -10px">
-        <mat-card *ngFor='let transaction of transactions$ | async' style="margin:10px; width: 400px">
-            <mat-card-title>{{transaction.currency}} {{transaction.amount}}</mat-card-title>
-            <mat-card-subtitle>{{transaction.date | date}}</mat-card-subtitle>
-            <mat-card-content>
-                <p>{{transaction.comment}}</p>
-            </mat-card-content>
-        </mat-card>
+    <div *ngIf="(transactions$ | async) as transactions">
+        <app-transaction-list [transactions]="transactions"></app-transaction-list>
     </div>
 </div>
 

@@ -12,13 +12,13 @@ import { ICreditCard } from '../../creditCard';
 export class CreditCardAddComponent implements OnInit {
 
   creditCardForm = this.formBuilder.group({
-    card_number: ['', [ Validators.required, CustomValidators.mustBeInteger(), Validators.minLength(7), Validators.maxLength(16)]],
+    card_number: ['', [Validators.required, CustomValidators.mustBeInteger(), Validators.minLength(7), Validators.maxLength(16)]],
     cardholder_name: ['', Validators.required],
     csc_code: ['', [Validators.required, CustomValidators.mustBeInteger(), CustomValidators.exactLength(3)]],
     expiration_date: this.formBuilder.group({
       month: ['', [Validators.required, CustomValidators.inRange(1, 12)]],
       year: ['', [Validators.required, CustomValidators.inRange(1, 31)]],
-    }, {validators: Validators.required, updateOn: 'change'}),
+    }, { validators: Validators.required, updateOn: 'change' }),
     issuer: ['', Validators.required]
   });
 
@@ -26,7 +26,7 @@ export class CreditCardAddComponent implements OnInit {
   cardCreated: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private service: CreditCardService) {
-   }
+  }
 
   ngOnInit(): void {
   }
@@ -35,7 +35,7 @@ export class CreditCardAddComponent implements OnInit {
     const formData = this.creditCardForm.value;
     console.log(formData);
 
-    if(!this.creditCardForm.valid) {
+    if (!this.creditCardForm.valid) {
       console.log("Invalid form-input")
       return;
     }
@@ -54,7 +54,7 @@ export class CreditCardAddComponent implements OnInit {
     response.subscribe(res => {
       console.log(res);
 
-      if(res.message="Created credit card") {
+      if (res.message = "Created credit card") {
         this.cardCreated = true;
         this.resetForm(this.creditCardForm);
       }
@@ -64,15 +64,15 @@ export class CreditCardAddComponent implements OnInit {
   transformYear(yearValue: number) {
     const yearStr = yearValue.toString();
 
-    if(yearStr.length === 4) {
+    if (yearStr.length === 4) {
       return yearValue;
     }
 
-    if(yearStr.length === 1) {
+    if (yearStr.length === 1) {
       return parseInt("200" + yearValue);
-    } else if(yearStr.length === 2) {
+    } else if (yearStr.length === 2) {
       return parseInt("20" + yearValue);
-    } else if(yearStr.length === 3){
+    } else if (yearStr.length === 3) {
       return parseInt("2" + yearValue);
     } else {
       return yearValue;
@@ -101,9 +101,9 @@ export class CreditCardAddComponent implements OnInit {
   }
 
   hasErrors(formControlName: string, errorNames: Array<string>) {
-      return errorNames.some(errorName => {
-        return this.creditCardForm.hasError(errorName, formControlName);
-      })
+    return errorNames.some(errorName => {
+      return this.creditCardForm.hasError(errorName, formControlName);
+    })
   }
 
 }
